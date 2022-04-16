@@ -1,0 +1,44 @@
+-r ./base.txt
+
+# Black, isort, and migrations auto-formatting
+black==22.3.0
+django-migrations-formatter==1.0.0
+isort==5.10.1
+
+# Formatting and code style
+flake8==4.0.1
+pyflakes==2.4.0
+pycodestyle==2.8.0
+mccabe==0.6.1
+
+# Debugging tools
+# also check out django-sink one of these days
+django-debug-toolbar==3.2.4
+django-extensions==3.1.5
+
+# Testing
+pytest==7.0.1
+pytest-django==4.5.2
+pytest-sugar==0.9.4
+nose==1.3.7
+django-nose==1.4.7
+
+# Generating fake objects for testing
+factory-boy==3.2.1
+Faker==13.0.0
+freezegun==1.1.0
+
+# Code coverage
+coverage==6.3.1
+django-coverage-plugin==2.0.2
+
+# Pip upgrades and tools
+pip-review==1.1.1
+pip-tools==6.5.1
+
+# For black/isort git commit pre-hook
+pre-commit==2.17.0
+
+# django-test-plus
+# selenium
+# whitenoise

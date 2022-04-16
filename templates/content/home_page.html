@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags %}
+
+{% block content %}
+
+<div class="headline-blurb mt-2">
+    <h1 class="display-4">{{ page.tagline }}</h1>
+</div>
+
+
+<div class="container mt-4">
+    <div class="row">
+
+    {% for block in page.cards %}
+        {% if block.block_type == 'card' %}
+            {% include_block block %}
+        {% endif %}
+    {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

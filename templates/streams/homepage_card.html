@@ -1,0 +1,25 @@
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+          <div class="col-md-4 d-flex align-items-stretch mb-3">
+            <div class="card" onclick="window.location='{% slugurl value.page.slug %}';">
+              {% if value.image %}
+                {% image value.image fill-350x350 class="card-img-top img-fluid" %}
+              {% endif %}
+              <div class="card-body">
+                {% if value.title %}<h5 class="card-title">{{ value.title }}</h5>{% endif %}
+
+                {% if value.blurb %}
+                <p class="card-text">
+                  {{ value.blurb|richtext }}
+                </p>
+                {% endif %}
+
+                {% if value.button %}
+                <p class="text-center">
+                  <a href="{% slugurl value.page.slug %}" class="btn btn-primary">{{ value.button }}</a>
+                </p>
+                {% endif %}
+              </div>
+            </div>
+          </div>

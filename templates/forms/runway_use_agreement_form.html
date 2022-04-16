@@ -1,0 +1,221 @@
+{% extends '_base.html' %}
+{% load runwayagreement_tags %}
+
+{% block header %}
+<style type="text/css">
+.legal-blurb {
+    border:  2px solid #cecece;
+    padding:  25px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.col-sm-4 {
+  padding-right: 0;
+}
+
+
+input, select {
+  margin-top: 5px;
+  font-size:  larger;
+}
+
+main {
+  margin: 0 10px 0 10px;
+}
+
+hr {
+  margin:  30px 0 30px 0;
+}
+
+#id_i_agree {
+    width: 1.55rem;
+  height: 1.55rem;
+}
+</style>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.legal-blurb i').each(function(index) {
+
+    $(this).addClass('underline');
+
+    let block = $(this).html();
+    if(block == 'TODAY') {
+      let date_str = new Intl.DateTimeFormat('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }).format(new Date())
+      $(this).html(date_str);
+    }
+    else if(block == 'YOUR-NAME') {
+      $(this).attr('id', 'legal_name_insert');
+    }
+    else if(block == 'YOUR-AIRCRAFT') {
+      $(this).attr('id', 'legal_tail_numbers_insert');
+    }
+
+  });
+
+
+});
+
+
+$('#id_name').on('change', function() {
+    $('#legal_name_insert').html($(this).val());
+});
+$('#id_tail_number').on('change', function() {
+    $('#legal_tail_numbers_insert').html($(this).val());
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<h3>Waunakee Airpark LLC - Runway Use Agreement</h3>
+
+<form method="post" class="mt-4">
+
+  {% csrf_token %}
+
+<div class="col-md-12 legal-form">
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Name:</label>
+    <div class="col-sm-8">
+      {{ form.name }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_organization" class="col-sm-4 col-form-label text-sm-end">Organization:</label>
+    <div class="col-sm-8">
+      {{ form.organization }}
+      <br>
+      <small class='text-muted'>If you are associated with a flying club, partnership, or business, enter the name here.</small>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_email" class="col-sm-4 col-form-label text-sm-end">Email:</label>
+    <div class="col-sm-8">
+      {{ form.email }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_phone" class="col-sm-4 col-form-label text-sm-end">Phone:</label>
+    <div class="col-sm-8">
+      {{ form.phone }}
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row mb-3">
+    <label for="id_address1" class="col-sm-4 col-form-label text-sm-end">Mailing Address:</label>
+    <div class="col-sm-8">
+      {{ form.address1 }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_address2" class="col-sm-4 col-form-label text-sm-end">Mailing Address 2:</label>
+    <div class="col-sm-8">
+      {{ form.address2 }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-sm-end">City:</label>
+    <div class="col-sm-8">
+      {{ form.city }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-sm-end">State:</label>
+    <div class="col-sm-8">
+      {{ form.state }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-sm-end">Zip:</label>
+    <div class="col-sm-8">
+      {{ form.zip_code }}
+    </div>
+  </div>
+
+
+  <hr>
+
+  <div class="row mb-3">
+    <label for="id_tail_number" class="col-sm-4 col-form-label text-sm-end">Aircraft N-Number(s):</label>
+    <div class="col-sm-8">
+      {{ form.tail_number }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_certificate_number" class="col-sm-4 col-form-label text-sm-end">Pilot Certificate Number:</label>
+    <div class="col-sm-8">
+      {{ form.certificate_number }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_certificate_level" class="col-sm-4 col-form-label text-sm-end">Pilot Cert. Level:</label>
+    <div class="col-sm-8">
+      {{ form.certificate_level }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_ifr_rated" class="col-sm-4 col-form-label text-sm-end">IFR Rated?</label>
+    <div class="col-sm-8">
+      {{ form.ifr_rated }}
+    </div>
+  </div>
+
+  <hr>
+
+</div>
+<!-- legal-form -->
+
+
+
+
+<div class="col-md-8 mt-3 mb-3 mx-auto legal-blurb">
+
+{% runwayagreement %}
+
+</div>
+<!-- legal-blurb -->
+
+
+  <div class="row mb-3 mt-4">
+    <div class="col-sm-1 col-md-3"></div>
+    <div class="col-sm-11 col-md-9">
+      {{ form.i_agree }} <strong>I agree to the Waunakee Airport Runway Use Agreement</strong>.
+    </div>
+  </div>
+
+
+  <div class="row mb-3 mt-4">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+      <button type="submit" class="btn btn-primary btn-lg">I Agree - Sign Form</button>
+    </div>
+  </div>
+
+
+</form>
+
+
+{% endblock %}

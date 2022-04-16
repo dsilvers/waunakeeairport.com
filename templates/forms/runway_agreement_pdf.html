@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<div>
+
+{{ agreement.content|safe }}
+
+</div>
+
+<div style="margin-top:20px;border:1px solid #cecece;padding:10px;">
+    <p>Name: {{ submission.name }}</p>
+    {% if submission.organization %}<p>Organization: {{ submission.organization }}</p>{% endif %}
+    <p>Agreed and Submitted Electronically at waunakeeairport.com on {{ submission.submit_datetime }}</p>
+    <p>IP/Browser: {{ submission.submit_ip_address}} [{{ submission.submit_reverse_dns}}] - {{ submission.submit_browser }}</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+@font-face {
+  font-family: Fjalla One;
+  src: url('/static/fonts/Fjalla_One/FjallaOne-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: Lato;
+  src: url('/static/fonts/Lato/Lato-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+}
+
+.navbar {
+  background-color:  rgb(94, 22, 104, 0.80) !important;
+  color: #fff;
+  border-bottom: 2px solid #9422a3;
+  position:  absolute;
+  width: 100%;
+  z-index: 99;
+}
+.navbar-brand {
+  font-family: 'Fjalla One', sans-serif;
+  color:  #fff;
+}
+.nav-link {
+  color:  #ccc;
+}
+.navbar-brand:hover, .nav-link:hover {
+  color: #fffda7;
+}
+
+.navbar-toggler {
+  padding: 0;
+  font-size: 2rem;
+
+}
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 .25rem #fffda7;
+}
+
+.navbar-toggler-icon {
+  width: auto;
+  height: auto;
+  color: #fff;
+}
+
+video, .image-hero img {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 180px;
+  max-height: 360px;
+  object-fit: cover;
+  border-bottom: 2px solid #9422a3;
+}
+
+.empty-hero {
+  min-height: 70px !important;
+  width: 100% !important;
+}
+
+.headline-blurb {
+  background-color:  #e9ecef;
+  border-radius:  0.5rem;
+  padding:  2rem 2rem;
+  font-family: 'Lato', sans-serif;
+}
+
+.headline-blurb h1 {
+  font-size: 2.0rem;
+}
+
+.card {
+  cursor:  pointer;
+}
+
+h3 {
+  border-bottom:  2px dotted #cecece;
+  font-family: 'Lato', sans-serif;
+  margin-top: 2.8rem;
+}
+
+footer {
+  font-size: smaller;
+
+}
+
+footer a {
+  color:  #6c757d!important;
+}

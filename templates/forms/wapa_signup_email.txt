@@ -1,0 +1,23 @@
+New WAPA signup from website.
+
+-------
+
+{{ signup.name }}
+{{ signup.address1 }}
+{% if signup.address2 %}{{ signup.address2 }}{% endif %}
+{{ signup.city }}, {{ signup.state}} {{ signup.zip}}
+
+Phone: {{ signup.phone }}
+Email: {{ signup.email }}
+
+------
+
+Aircraft details (optional)
+
+Year/Make/Model: {{ signup.aircraft_year_make_model }}
+N Number: {{ signup.aircraft_n_number }}
+Based At: {{ signup.aircraft_based_at }}
+
+------
+
+Signup Date/Time: {{ signup.signup_datetime }}

@@ -1,0 +1,116 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags %}
+
+{% block content %}
+
+<p><a href="/wapa">Back to WAPA Page</a></p>
+
+<h1>Join WAPA!</h1>
+
+<p>Waunakee Airport & Pilots Association Membership costs $10/year per family member. The first year of membership is free!</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+<div class="col-md-6 wapa-form">
+
+    <h3>About You</h3>
+
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-end">Name:</label>
+    <div class="col-sm-8">
+      {{ form.name }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_email" class="col-sm-4 col-form-label text-end">Email:</label>
+    <div class="col-sm-8">
+      {{ form.email }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_phone" class="col-sm-4 col-form-label text-end">Phone:</label>
+    <div class="col-sm-8">
+      {{ form.phone }}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row mb-3">
+    <label for="id_address1" class="col-sm-4 col-form-label text-end">Mailing Address:</label>
+    <div class="col-sm-8">
+      {{ form.address1 }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_address2" class="col-sm-4 col-form-label text-end">Mailing Address 2:</label>
+    <div class="col-sm-8">
+      {{ form.address2 }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-end">City:</label>
+    <div class="col-sm-8">
+      {{ form.city }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-end">State:</label>
+    <div class="col-sm-8">
+      {{ form.state }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_city" class="col-sm-4 col-form-label text-end">Zip:</label>
+    <div class="col-sm-8">
+      {{ form.zip_code }}
+    </div>
+  </div>
+
+  <h3>Aircraft Info (optional)</h3>
+
+   <div class="row mb-3">
+    <label for="aircraft_year_make_model" class="col-sm-4 col-form-label text-end">Year/Make/Model:</label>
+    <div class="col-sm-8">
+      {{ form.aircraft_year_make_model }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="aircraft_n_number" class="col-sm-4 col-form-label text-end">N Number:</label>
+    <div class="col-sm-8">
+      {{ form.aircraft_n_number }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_aircraft_based" class="col-sm-4 col-form-label text-end">Based At:</label>
+    <div class="col-sm-8">
+      {{ form.aircraft_based }}
+    </div>
+  </div>
+
+  <div class="row mb-3 mt-5">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+      <button type="submit" class="btn btn-primary btn-lg">Join WAPA</button>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+{% endblock %}

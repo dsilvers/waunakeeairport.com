@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /django-admin/
+Disallow: /cms/
+
+Sitemap: https://www.waunakeeairport.com/sitemap.xml

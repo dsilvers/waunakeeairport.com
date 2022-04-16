@@ -1,0 +1,30 @@
+Thanks for signing the Waunakee Airpark Runway Use Agreement. Below are the details you submitted and a PDF copy of the document.
+
+Please review the "Pilot Information and Airport Procedures" page on our website for further guidance on safely operating in and out of Waunakee.
+
+https://www.waunakeeairport.com/pilot-information-and-airport-procedures/
+
+Please reply to this email if you have any questions.
+
+Fly Safe!
+Waunakee Airpark LLC
+
+
+------------------------------
+
+
+N Number: {% if submission.tail_number %}{{ submission.tail_number }}{% else %}(none submitted){% endif %}
+
+{{ submission.name }} {% if submission.organization %}[{{ submission.organization }}]{% endif %}
+{{ submission.email }}
+{{ submission.phone }}
+
+{{ submission.address1 }}{% if submission.address2 %}
+{{ submission.address2 }}{% endif %}
+{{ submission.city }}, {{ submission.state }} {{ submission.zip_code }}
+
+Certificate: {{ submission.certificate_level }} #{% if submission.certificate_number %}{{ submission.certificate_number }}{% else %}<no cert number>{% endif %} {% if submission.ifr_rated %}[IFR]{% else %}[VFR]{% endif %}
+
+Submitted & Signed Date/Time: {{ submission.submit_datetime }}
+ID: {{ submission.pk }}
+PDF: {{ submission.s3_pdf_filename }}

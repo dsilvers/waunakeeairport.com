@@ -1,0 +1,195 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags %}
+
+{% block header %}
+<style type="text/css">
+
+@font-face {
+  font-family: Bree Serif;
+  src: url('{% static "fonts/Bree_Serif/BreeSerif-Regular.woff2" %}') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Coda;
+  src: url('{% static "fonts/Coda/Coda-Regular.woff2" %}') format('woff2');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Tienne;
+  src: url('{% static "fonts/Tienne/Tienne-Bold.woff2" %}') format('woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Martell;
+  src: url('{% static "fonts/Martel/Martel-Light.woff2" %}') format('woff2');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Quattrocento;
+  src: url('{% static "fonts/Quattrocento/Quattrocento-Bold.woff2" %}') format('woff2');
+  font-weight: 700;
+}
+
+
+body {
+    background-color: #ffdd00;
+}
+
+.pancake-container {
+    text-align: center;
+}
+
+.presents-outer {
+    border: 4px solid #001b75;
+}
+
+.presents {
+    font-family: 'Coda', sans-serif;
+    background: red;
+    color: white;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+}
+
+.banner {
+    font-family: 'Bree Serif', serif;
+    color: #001b75;
+    line-height:  0.95;
+}
+
+.word-pancakes {
+    font-size: 6em;
+    border-top:  4px solid red;
+}
+.word-and {
+    font-size: 3rem;
+    color: white;
+    letter-spacing: .7rem;
+}
+.word-planes {
+    font-size: 8em;
+    border-bottom:  8px dotted red;
+}
+
+.date-row {
+    border-bottom: 2px solid red;
+}
+
+.date {
+    font-family: 'Coda', sans-serif;
+    font-size:  2rem;
+    color: red;
+}
+
+.time {
+    font-family:  'Bree Serif', serif;
+    font-size:  2rem;
+    color: #001b75;
+}
+
+.location a {
+    font-family: 'Coda', sans-serif;
+    font-size:  1.2rem;
+    color: red;
+    text-decoration: none;
+    border-bottom:  2px dotted #ffef61;
+}
+
+.pancake-image {
+
+}
+
+.price-row {
+    border-top:  4px solid red;
+    border-bottom: 4px solid red;
+    font-family: 'Coda', sans-serif;
+    font-size: 2rem;
+    color: red;
+}
+
+
+.rides {
+    font-family: 'Tienne', serif;
+    font-size: 3.5rem;
+    color: #001b75;
+    border-top: 2px solid red;
+}
+
+.ride-blurb {
+    font-family: 'Martell', serif;
+    font-size: 1.9rem;
+    color: #001b75;
+}
+
+.suggested-dontation {
+    font-family: Quattrocento;
+    font-size: 1.2rem;
+    color: #001b75;
+    border-bottom:  8px dotted red;
+}
+
+footer {
+    color: black;
+}
+
+footer.border-top {
+    border-top:  none !important;
+}
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="container pancake-container">
+
+    <div class="presents-outer mt-5 p-1 mb-4">
+        <div class="presents p-2">
+            WAUNAKEE AIRPORT PRESENTS
+        </div>
+    </div>
+
+    <div class="banner word-pancakes mt-5 pt-3 mb-1">PANCAKES</div>
+    <div class="banner word-and">AND</div>
+    <div class="banner word-planes pb-5">PLANES</div>
+
+    <div class="row date-row mt-3 pb-3 mb-0">
+        <div class="pancake-image"></div>
+        <div class="date-time">
+            <div class="date">SUNDAY, SEPTEMBER 11, 2022</div>
+            <div class="time">7:30 AM 'TIL NOON</div>
+            <div class="location mt-2">
+                <a href="https://www.google.com/maps/place/43%C2%B010'43.9%22N+89%C2%B026'49.9%22W/@43.1788539,-89.4477301,19z/" target="_blank"><i class="bi bi-geo-alt"></i> SOUTH DIVISION STREET, WAUNAKEE</a>
+            </div>
+        </div>
+        <div class="pancake-image"></div>
+    </div>
+
+    <div class="row price-row mt-1 py-3 px-0">
+        <div class="col">
+            $TBD ADULT BREAKFAST
+        </div>
+        <div class="col">
+            $TBD KIDS 10 & UNDER
+        </div>
+    </div>
+
+    <div class="rides mt-1">
+        Go for an airplane ride!
+    </div>
+
+    <div class="ride-blurb">
+        Get a soaring view of Madison & Waunakee!
+    </div>
+
+    <div class="suggested-dontation mt-2 pb-4">
+        Weather permitting. Suggested donation $40.
+    </div>
+
+
+</div>
+{% endblock %}
