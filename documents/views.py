@@ -22,11 +22,10 @@ from .models import RunwayUseAgreement, RunwayUseAgreementDocument
 
 class WTF(View):
     def get(self, *args, **kwargs):
-        print("HEADERS")
-        print(self.request.headers)
-        print("META")
-        print(self.request.META)
-
+        #print("HEADERS")
+        #print(self.request.headers)
+        #print("META")
+        #print(self.request.META)
         return HttpResponse("OK")
 
 
@@ -123,14 +122,9 @@ class ProcessRunwayUseAgreementView(View):
             },
         )
 
-        tail_number = "(NO TAIL NUMBER SUBMITTED)"
-        if submission.tail_number:
-            tail_number = submission.tail_number.upper()
-
         content = (
             content.replace("TODAY", str(submission.submit_datetime.date()))
             .replace("YOUR-NAME", submission.name.upper())
-            .replace("YOUR-AIRCRAFT", tail_number)
         )
 
         filename = slugify(f"{submission.name}-{submission.pk}") + ".pdf"

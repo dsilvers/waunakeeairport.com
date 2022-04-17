@@ -56,21 +56,12 @@ $(document).ready(function() {
     else if(block == 'YOUR-NAME') {
       $(this).attr('id', 'legal_name_insert');
     }
-    else if(block == 'YOUR-AIRCRAFT') {
-      $(this).attr('id', 'legal_tail_numbers_insert');
-    }
-
   });
-
-
 });
 
 
 $('#id_name').on('change', function() {
     $('#legal_name_insert').html($(this).val());
-});
-$('#id_tail_number').on('change', function() {
-    $('#legal_tail_numbers_insert').html($(this).val());
 });
 </script>
 {% endblock %}
