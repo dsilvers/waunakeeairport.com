@@ -31,7 +31,6 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("wtf", document_views.WTF.as_view()),
     path("forms/runway-use-agreement", document_views.RunwayUseAgreementView.as_view(), name="runway_use_agreement"),
     path(
         "forms/process-runway-use-agreement",

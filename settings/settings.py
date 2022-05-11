@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "localflavor",
     "content",
     "documents",
+    "timeline",
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,9 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 WAGTAIL_SITE_NAME = "Waunakee Airport"
+#WAGTAILIMAGES_IMAGE_MODEL = 'gallery.WaunakeeImage'
+WAGTAILIMAGES_MAX_UPLOAD_SIZE = 20 * 1024 * 1024 
+WAGTAILIMAGES_INDEX_PAGE_SIZE = 100
 
 S3_BUCKET_NAME = env("S3_STATIC_FILES_BUCKET", default=None)
 
@@ -191,3 +195,26 @@ MANAGERS = [
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 USE_X_FORWARDED_HOST = True
+
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+        }
+    }
+}

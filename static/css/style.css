@@ -86,3 +86,7 @@ footer {
 footer a {
   color:  #6c757d!important;
 }
+
+.alert-danger {
+  background-color:  #dc3545!important;
+}

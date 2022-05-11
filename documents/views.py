@@ -20,15 +20,6 @@ from .forms import RunwayUseAgreementForm, WAPASignupForm
 from .models import RunwayUseAgreement, RunwayUseAgreementDocument
 
 
-class WTF(View):
-    def get(self, *args, **kwargs):
-        #print("HEADERS")
-        #print(self.request.headers)
-        #print("META")
-        #print(self.request.META)
-        return HttpResponse("OK")
-
-
 class RunwayUseAgreementView(CreateView):
     form_class = RunwayUseAgreementForm
     template_name = "forms/runway_use_agreement_form.html"
@@ -42,12 +33,12 @@ class RunwayUseAgreementView(CreateView):
         if x_forwarded_for:
             ip = x_forwarded_for.split(",")[0]
         else:
-            ip = self.request.META.get("REMOTE_ADDR", "")
+            ip = ""
 
         reverse_dns = ""
         if ip:
             try:
-                reverse_dns = gethostbyaddr(reverse_dns)[0]
+                reverse_dns = gethostbyaddr(ip)[0]
             except Exception:
                 reverse_dns = ""
 

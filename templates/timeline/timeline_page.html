@@ -1,0 +1,147 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block header %}
+<style type="text/css">
+
+.view-next {
+    background-color: #efefef;
+}
+
+.timeline-item {
+    border:  1px solid #dadada;
+    cursor:  pointer;
+}
+
+.img-thumbnail {
+    border:  1px solid #dadada;
+    box-shadow: 3px 2px 2px #bebebe;
+}
+
+.list-group-item {
+    color:  #6e6e6e;
+    font-size:  smaller;
+}
+</style>
+{% endblock %}
+
+
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".timeline-item").click(function() {
+      window.location = $(this).find("a").attr("href"); 
+      return false;
+    });
+});
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<h3>{{ page.title }}</h3>
+{% for block in page.content %}
+    {% if block.block_type == 'image' %}
+        <div class="container border my-4">
+            {% image block.value original class="img-fluid" %}
+        </div>
+    {% endif %}
+{% endfor %}
+
+
+
+
+<!-- credit / sources -->
+
+<div class="container">
+    <div class="row">
+
+{% if page.people.count or page.events.count or page.publication.count or page.source_url or page.photo_credit or page.courtesy_of %}
+<div class="col-md-6 col-sm-12 p-4 article-credits">
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-secondary">
+            ARTICLE CREDITS
+        </li>
+
+        {% if page.people.count %}
+        <li class="list-group-item">
+            <strong>People:</strong>
+            {% for tag in page.people.all %}
+                {{ tag }}{% if page.people.last != tag %}, {% endif %}
+            {% endfor %}
+        </li>
+        {% endif %}
+
+        {% if page.events.count %}
+        <li class="list-group-item">
+            <strong>Event:</strong>
+            {% for tag in page.events.all %}
+                {{ tag }}{% if page.events.last != tag %}, {% endif %}
+            {% endfor %}
+        </li>
+        {% endif %}
+
+        {% if page.publication.count or page.source_url %}
+        <li class="list-group-item">
+            {% if page.publication.count %}
+                <strong>Published in</strong> {{ page.publication.all.0 }} <strong>on</strong> {{ page.date }}
+                {% if page.page_or_edition %}<strong>on page</strong> {{ page.page_or_edition }}{% endif %}
+            {% endif %}
+
+            {% if page.source_url %}
+                <a href="{{ page.source_url }}" target="_blank">[View Published Article]</a>
+            {% endif %}
+        </li>
+        {% endif %}
+
+        {% if page.photo_credit %}
+        <li class="list-group-item">
+            <strong>Photos by</strong> {{ page.photo_credit }}
+        </li>
+        {% endif %}
+
+
+        {% if page.courtesy_of %}
+        <li class="list-group-item">
+            <strong>Thanks to</strong> {{ page.courtesy_of }}
+        </li>
+        {% endif %}
+
+    </ul>
+</div>
+{% endif %}
+
+
+
+<!-- next timeline item -->
+
+{% if page.next_sibling %}
+<div class="col-md-6 col-sm-12 p-4">
+    <div class="col-12 p-4 timeline-item view-next">
+        <div class="col-sm-12">
+            <h5>View Next:</h5>
+        </div>
+        <div class="col-sm-12">
+            {% image page.next_sibling.highlight_image fill-500x500-c100 class="img-thumbnail" %}
+        </div>
+        <div class="col-sm-12 col-md-auto mt-3">
+            <h4>
+                <a href="{{ page.next_sibling.url }}">{{ page.next_sibling.title }}</a>
+            </h4>
+            <p>
+                <span class="text-muted">{{ page.next_sibling.date }}</span>
+                {% if page.next_sibling.caption %} - {{ page.next_sibling.caption }}{% endif %}
+            </p>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
+</div>
+</div>
+
+
+{% endblock %}

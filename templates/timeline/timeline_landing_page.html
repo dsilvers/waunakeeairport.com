@@ -1,0 +1,69 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block header %}
+<style type="text/css">
+
+.timeline-item {
+    border:  1px solid #dadada;
+    cursor:  pointer;
+}
+
+.img-thumbnail {
+    border:  1px solid #dadada;
+    box-shadow: 3px 2px 2px #bebebe;
+}
+
+.display-4 {
+    font-size: calc(1.05rem + 2.7vw);
+}
+
+</style>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".timeline-item").click(function() {
+      window.location = $(this).find("a").attr("href"); 
+      return false;
+    });
+});
+
+</script>
+{% endblock %}
+
+
+
+{% block content %}
+
+<h3>Waunakee Airport - Timeline</h3>
+
+<div class="container">
+{% for page in self.get_timeline_items %}
+    
+    {% ifchanged page.date|date:"Y" %}
+    <div class="timeline-year">
+        <h1 class="display-4">{{ page.date|date:"Y" }}</h1>
+    </div>
+    {% endifchanged %}
+
+    <div class="row mb-4 p-3 timeline-item">
+        <div class="col-sm-12 col-md-2">
+            {% image page.highlight_image fill-500x500-c100 class="img-thumbnail" %}
+        </div>
+        <div class="col-sm-12 col-md-auto mt-3">
+            <h4>
+                <a href="{{ page.slug }}">{{ page.title }}</a>
+            </h4>
+            <p>
+                <span class="text-muted">{{ page.date }}</span>
+                {% if page.caption %} - {{ page.caption }}{% endif %}
+            </p>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+
+{% endblock %}
