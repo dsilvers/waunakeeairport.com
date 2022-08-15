@@ -55,7 +55,6 @@ class RunwayUseAgreement(models.Model):
         default=CertificateLevelChoices.NONE,
     )
     ifr_rated = models.BooleanField(default=False)
-    certificate_number = models.CharField(max_length=30, blank=True)
 
     submit_browser = models.CharField(max_length=250, blank=True)
     submit_ip_address = models.GenericIPAddressField(blank=True, null=True)

@@ -20,7 +20,6 @@ class RunwayUseAgreementForm(forms.ModelForm):
             "zip_code",
             "tail_number",
             "certificate_level",
-            "certificate_number",
             "ifr_rated",
             "i_agree",
         ]
