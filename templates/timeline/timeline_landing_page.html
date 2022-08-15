@@ -36,10 +36,41 @@ $(document).ready(function() {
 
 {% block content %}
 
-<h3>Waunakee Airport - Timeline</h3>
+<h3>{{ title }}</h3>
+
+{% if person %}
+
+    {% if person.image %}
+        {% image person.image max-320x320 %}
+        {% endif %}
+
+    {% if person.blurb %}
+        {{ person.blurb|safe }}
+    {% endif %}
+
+    {% if person.image %}
+    <hr>
+    {% endif %}
+
+{% elif event %}
+
+    {% if event.image %}
+        {% image event.image max-320x320 %}
+    {% endif %}
+
+    {% if event.blurb %}
+        {{ event.blurb|safe }}
+    {% endif %}
+
+    {% if event.image or event.blurb %}
+    <hr>
+    {% endif %}
+
+{% endif %}
+
 
 <div class="container">
-{% for page in self.get_timeline_items %}
+{% for page in pages %}
     
     {% ifchanged page.date|date:"Y" %}
     <div class="timeline-year">

@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'wagtail.contrib.modeladmin',
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -55,12 +57,21 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail.core",
+
+    # "debug_toolbar",
+
     "taggit",
     "modelcluster",
     "localflavor",
     "content",
     "documents",
     "timeline",
+]
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
 ]
 
 MIDDLEWARE = [
@@ -72,6 +83,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
+
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = "waunakeeairport.urls"
@@ -134,7 +147,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 WAGTAIL_SITE_NAME = "Waunakee Airport"
-#WAGTAILIMAGES_IMAGE_MODEL = 'gallery.WaunakeeImage'
+WAGTAILIMAGES_IMAGE_MODEL = 'timeline.WaunakeeImage'
 WAGTAILIMAGES_MAX_UPLOAD_SIZE = 20 * 1024 * 1024 
 WAGTAILIMAGES_INDEX_PAGE_SIZE = 100
 
@@ -196,7 +209,7 @@ SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 USE_X_FORWARDED_HOST = True
 
-
+"""
 LOGGING = {
     'version': 1,
     'filters': {
@@ -218,3 +231,4 @@ LOGGING = {
         }
     }
 }
+"""

@@ -1,5 +1,5 @@
 {% extends '_base.html' %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailroutablepage_tags %}
 
 {% block header %}
 <style type="text/css">
@@ -69,7 +69,10 @@ $(document).ready(function() {
         <li class="list-group-item">
             <strong>People:</strong>
             {% for tag in page.people.all %}
-                {{ tag }}{% if page.people.last != tag %}, {% endif %}
+                {{ timeline_landing_page }}
+                <a href="/person/{{ tag.slug }}">
+                    {{ tag }}
+                </a>{% if page.people.last != tag %}, {% endif %}
             {% endfor %}
         </li>
         {% endif %}
@@ -78,7 +81,9 @@ $(document).ready(function() {
         <li class="list-group-item">
             <strong>Event:</strong>
             {% for tag in page.events.all %}
-                {{ tag }}{% if page.events.last != tag %}, {% endif %}
+                <a href="/event/{{ tag.slug }}">
+                    {{ tag }}
+                </a>{% if page.events.last != tag %}, {% endif %}
             {% endfor %}
         </li>
         {% endif %}

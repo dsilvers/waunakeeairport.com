@@ -28,6 +28,8 @@ from wagtail.documents import urls as wagtaildocs_urls
 from documents import views as document_views
 
 urlpatterns = [
+    # path('__debug__/', include('debug_toolbar.urls')),
+
     path("django-admin/", admin.site.urls),
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
