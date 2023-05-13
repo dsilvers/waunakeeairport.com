@@ -177,8 +177,7 @@ SERVER_EMAIL = "Waunakee Airpark <fly@waunakeeairport.com>"
 
 WAPA_SIGNUP_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
 RUNWAY_AGREEMENT_SIGNUP_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
-# AOA_FORM_SUBMISSION_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
-AOA_FORM_SUBMISSION_SEND_EMAIL_TO = "test@silvers.net"
+AOA_FORM_SUBMISSION_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
 
 EMAIL_CONFIG = env.email_url("EMAIL_URL", default="smtp://@localhost:1025")
 vars().update(EMAIL_CONFIG)
