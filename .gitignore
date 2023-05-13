@@ -72,3 +72,5 @@ tmp/
 bin/
 
 zappa_settings.json
+
+.db

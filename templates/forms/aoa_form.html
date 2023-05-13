@@ -1,0 +1,129 @@
+{% extends '_base.html' %}
+
+{% block header %}
+<style type="text/css">
+
+.underline {
+  text-decoration: underline;
+}
+
+.col-sm-4 {
+  padding-right: 0;
+}
+
+
+input, select {
+  margin-top: 5px;
+  font-size:  larger;
+}
+
+main {
+  margin: 0 10px 0 10px;
+}
+
+hr {
+  margin:  30px 0 30px 0;
+}
+
+input, textarea {
+  width: 100%;
+}
+
+ul li {
+  line-height: 1.8 !important;
+}
+
+</style>
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function() {
+
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<h3>Airport Operations Area (AOA) - Access Request</h3>
+
+<div class="col-lg-6 col-md-9 col-sm-12 mt-3 p-2">
+  <p>If you need access to your backyard by utilizing the airport property, please fill out the form below.</p>
+  
+  <p>For immediate assistance, call or text Dan Silvers at <a href="tel:4144160810">(414) 416-0810</a> or Jim Meier at <a href="tel:6086989498">(608) 698-9498</a>.</p>
+
+  <hr>
+
+  <h4>Access Guidelines</h4>
+
+  <ul>
+      <li>Vehicles should drive in the grass on the north side of the runway.</li>
+      <li>Avoid driving on the paved and turf runways.</li>
+      <li>Turn on your hazard lights.</li>
+      <li>Drive slowly.</li>
+      <li>Exit your vehicle before entering the runway environment and visually scan the traffic pattern for aircraft.</li>
+      <li>Utilize a handheld radio and announce your intentions on 122.9. A radio is available for you to borrow.</li>
+      <li>Heavy equipment such as large trailers, campers, tree trimming equipment, and cement trucks have damaged our grass surfaces in the past. Please consider runway and turf conditions before driving on airport property.</li>
+      <li><b>If you have any questions or require assistance, please reach out to the contacts above!</b></li>
+  </ul>
+
+  <hr>
+</div>
+
+<form method="post" class="mt-4">
+
+  {% csrf_token %}
+
+  <div class="col-lg-6 col-md-9 col-sm-12 mt-3 p-2">
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Name:</label>
+    <div class="col-sm-8">
+      {{ form.name }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Phone:</label>
+    <div class="col-sm-8">
+      {{ form.phone }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Email:</label>
+    <div class="col-sm-8">
+      {{ form.email }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Address:</label>
+    <div class="col-sm-8">
+      {{ form.address }}
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label for="id_name" class="col-sm-4 col-form-label text-sm-end">Purpose:</label>
+    <div class="col-sm-8">
+      {{ form.purpose }}
+    </div>
+  </div>
+
+  <div class="row mb-3 mt-4">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-9">
+      <button type="submit" class="btn btn-primary btn-lg">Submit AOA Access Request</button>
+    </div>
+  </div>
+
+</div>
+
+
+
+</form>
+
+
+{% endblock %}

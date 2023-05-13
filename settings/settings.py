@@ -170,12 +170,15 @@ DATABASES = {
 
 # SNS Topic for processing runway agreement form submissions
 SNS_TOPIC_AIRPORT_RUNWAY_AGREEMENT = env("SNS_TOPIC_AIRPORT_RUNWAY_AGREEMENT", default=None)
+SNS_TOPIC_AOA_FORM_SUBMISSION = env("SNS_TOPIC_AOA_FORM_SUBMISSION", default=None)
 S3_BUCKET_AIRPORT_RUNWAY_AGREEMENT = env("S3_BUCKET_AIRPORT_RUNWAY_AGREEMENT", default=None)
 
 SERVER_EMAIL = "Waunakee Airpark <fly@waunakeeairport.com>"
 
 WAPA_SIGNUP_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
 RUNWAY_AGREEMENT_SIGNUP_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
+# AOA_FORM_SUBMISSION_SEND_EMAIL_TO = "Waunakee Airpark <fly@waunakeeairport.com>"
+AOA_FORM_SUBMISSION_SEND_EMAIL_TO = "test@silvers.net"
 
 EMAIL_CONFIG = env.email_url("EMAIL_URL", default="smtp://@localhost:1025")
 vars().update(EMAIL_CONFIG)

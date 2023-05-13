@@ -73,6 +73,24 @@ class RunwayUseAgreement(models.Model):
         return f"{self.name} [{self.submit_datetime}]"
 
 
+class AOASubmission(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    address = models.CharField(max_length=250, blank=True, null=True)
+    purpose = models.TextField()
+
+    submit_datetime = models.DateTimeField(auto_now_add=True)
+    sns_processed_datetime = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ["-pk"]
+
+    def __str__(self):
+        return f"{self.name} [{self.submit_datetime}]"
+
+
+
 class WAPASignup(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()

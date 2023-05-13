@@ -16,17 +16,8 @@ from django.views.generic import View
 from django.views.generic.edit import CreateView
 from xhtml2pdf import pisa
 
-from .forms import RunwayUseAgreementForm, WAPASignupForm
-from .models import RunwayUseAgreement, RunwayUseAgreementDocument
-
-
-class WTF(View):
-    def get(self, *args, **kwargs):
-        #print("HEADERS")
-        #print(self.request.headers)
-        #print("META")
-        #print(self.request.META)
-        return HttpResponse("OK")
+from .forms import RunwayUseAgreementForm, WAPASignupForm, AOAForm
+from .models import RunwayUseAgreement, RunwayUseAgreementDocument, AOASubmission
 
 
 class RunwayUseAgreementView(CreateView):
@@ -182,6 +173,85 @@ class ProcessRunwayUseAgreementView(View):
         email.send(fail_silently=True)
 
         os.remove(temporary_file)
+        return HttpResponse("OK")
+    
+
+class AOASubmissionView(CreateView):
+    form_class = AOAForm
+    template_name = "forms/aoa_form.html"
+    success_url = "/aoa-thanks/"
+
+    def form_valid(self, form):
+        self.object = form.save()
+
+        client = boto3.client("sns")
+        try:
+            response = client.publish(
+                TopicArn=settings.SNS_TOPIC_AOA_FORM_SUBMISSION,
+                Message=str(self.object.pk),
+            )
+        except Exception as e:
+            print(e)
+            pass
+
+        return HttpResponseRedirect(self.get_success_url())
+    
+@method_decorator(csrf_exempt, name="dispatch")
+class ProcessAOASubmissionView(View):
+    def post(self, *args):
+        try:
+            data = json.loads(self.request.body)
+        except Exception as e:
+            return HttpResponse(f"NOT OK: unable to parse JSON. Error: {e}")
+
+        topic_arn = data.get("TopicArn", None)
+        if not topic_arn or topic_arn != settings.SNS_TOPIC_AOA_FORM_SUBMISSION:
+            return HttpResponse(f"NOT OK: TopicARN does not match what we are expecting. {topic_arn}")
+
+        sns_message_type = data.get("Type", None)
+        if sns_message_type == "SubscriptionConfirmation":
+            print("BEGIN VERIFICATION URL")
+            print(data.get("SubscribeURL"))
+            print("END VERIFICATION URL")
+            return HttpResponse("OK for subscription confirmation")
+
+        submission_pk = data.get("Message", None)
+        if not submission_pk:
+            return HttpResponse("NOT OK: ID is missing from the Message Body")
+
+        try:
+            int(submission_pk)
+        except ValueError:
+            return HttpResponse("NOT OK: invalid ID")
+
+        try:
+            submission = AOASubmission.objects.get(pk=submission_pk)
+        except RunwayUseAgreement.DoesNotExist:
+            return HttpResponse("NOT OK: UUID not found in DB")
+
+        if submission.sns_processed_datetime:
+            return HttpResponse("ALREADY PROCESSED")
+
+        submission.sns_processed_datetime = timezone.now()
+        submission.save()
+
+        # Generate email body
+        email_body = render_to_string(
+            "forms/aoa_email.txt",
+            {
+                "submission": submission,
+            },
+        )
+
+        # Email Us
+        email = EmailMessage(
+            f"[6P3] AOA Request - {submission.name}",  # subject
+            email_body,
+            settings.SERVER_EMAIL,  # From
+            to=[settings.AOA_FORM_SUBMISSION_SEND_EMAIL_TO],  # To []
+            headers={"Reply-To": submission.email or settings.AOA_FORM_SUBMISSION_SEND_EMAIL_TO},
+        )
+        email.send(fail_silently=True)
         return HttpResponse("OK")
 
 
