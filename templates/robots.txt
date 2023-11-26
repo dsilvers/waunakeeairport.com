@@ -1,7 +1,6 @@
 User-agent: *
 Disallow: /django-admin/
 Disallow: /cms/
-Disallow: /forms/aoa
 Disallow: /forms/runway-use-agreement
 
 Sitemap: https://www.waunakeeairport.com/sitemap.xml

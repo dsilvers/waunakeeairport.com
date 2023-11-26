@@ -1,28 +1,12 @@
-"""waunakeeairport URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 
-# from django.contrib.sitemaps.views import sitemap as django_sitemap
 from django.urls import include, path, re_path
 from django.views.generic.base import TemplateView
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap as wagtail_sitemap
-from wagtail.core import urls as wagtail_urls
+from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 from documents import views as document_views
@@ -30,21 +14,9 @@ from documents import views as document_views
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("cms/", include(wagtailadmin_urls)),
-    path("wtf", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path("documents/", include(wagtaildocs_urls)),
     path("airpark/", TemplateView.as_view(template_name="forms/forms_list.html")),
     path("forms/runway-use-agreement", document_views.RunwayUseAgreementView.as_view(), name="runway_use_agreement"),
-    path("forms/aoa", document_views.AOASubmissionView.as_view(), name="aoa_form"),
-    path(
-        "forms/process-runway-use-agreement",
-        document_views.ProcessRunwayUseAgreementView.as_view(),
-        name="process_runway_use_agreement",
-    ),
-    path(
-        "forms/process-aoa",
-        document_views.ProcessAOASubmissionView.as_view(),
-        name="process_aoa",
-    ),
     path("wapa/join", document_views.WAPASignupView.as_view(), name="wapa_signup"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path("sitemap.xml", wagtail_sitemap),

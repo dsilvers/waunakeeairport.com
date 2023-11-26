@@ -2,12 +2,11 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel, StreamFieldPanel
-from wagtail.core import blocks
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Orderable, Page
+from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel, PageChooserPanel # , StreamFieldPanel
+from wagtail import blocks
+from wagtail.fields import RichTextField, StreamField
+from wagtail.models import Orderable, Page
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 
 
@@ -28,9 +27,9 @@ class WaunakeeAirportPageBaseMixin(models.Model):
     )
 
     promote_panels = Page.promote_panels + [
-        ImageChooserPanel("hero_image"),
+        FieldPanel("hero_image"),
         FieldPanel("hero_video_url"),
-        ImageChooserPanel("og_image"),
+        FieldPanel("og_image"),
     ]
 
     class Meta:
@@ -117,12 +116,12 @@ class HomePage(WaunakeeAirportPageBaseMixin, Page):
     cards = StreamField(
         [
             ("card", HomePageCardBlock()),
-        ]
+        ], use_json_field=True
     )
 
     content_panels = Page.content_panels + [
         FieldPanel("tagline"),
-        StreamFieldPanel("cards"),
+        FieldPanel("cards"),
     ]
 
 
@@ -142,11 +141,12 @@ class PilotAirportInfoPage(WaunakeeAirportPageBaseMixin, Page):
             ("heading", blocks.CharBlock(form_classname="full title")),
             ("paragraph", blocks.RichTextBlock()),
             ("image", ImageChooserBlock()),
-        ]
+        ],
+        use_json_field=True
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
 

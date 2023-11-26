@@ -3,8 +3,8 @@
 import django.db.models.deletion
 import django_extensions.db.fields
 import modelcluster.fields
-import wagtail.core.blocks
-import wagtail.core.fields
+import wagtail.blocks
+import wagtail.fields
 import wagtail.images.blocks
 from django.db import migrations, models
 
@@ -47,10 +47,10 @@ class Migration(migrations.Migration):
                 ("hero_video_url", models.CharField(blank=True, max_length=255)),
                 (
                     "body",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         [
-                            ("heading", wagtail.core.blocks.CharBlock(form_classname="full title")),
-                            ("paragraph", wagtail.core.blocks.RichTextBlock()),
+                            ("heading", wagtail.blocks.CharBlock(form_classname="full title")),
+                            ("paragraph", wagtail.blocks.RichTextBlock()),
                             ("image", wagtail.images.blocks.ImageChooserBlock()),
                         ]
                     ),
@@ -171,17 +171,17 @@ class Migration(migrations.Migration):
                 ("tagline", models.CharField(max_length=255)),
                 (
                     "cards",
-                    wagtail.core.fields.StreamField(
+                    wagtail.fields.StreamField(
                         [
                             (
                                 "card",
-                                wagtail.core.blocks.StructBlock(
+                                wagtail.blocks.StructBlock(
                                     [
-                                        ("name", wagtail.core.blocks.CharBlock(max_length=120)),
-                                        ("blurb", wagtail.core.blocks.RichTextBlock()),
-                                        ("button", wagtail.core.blocks.CharBlock(max_length=120)),
+                                        ("name", wagtail.blocks.CharBlock(max_length=120)),
+                                        ("blurb", wagtail.blocks.RichTextBlock()),
+                                        ("button", wagtail.blocks.CharBlock(max_length=120)),
                                         ("image", wagtail.images.blocks.ImageChooserBlock()),
-                                        ("page", wagtail.core.blocks.PageChooserBlock()),
+                                        ("page", wagtail.blocks.PageChooserBlock()),
                                     ]
                                 ),
                             )
@@ -231,7 +231,7 @@ class Migration(migrations.Migration):
                 ),
                 ("hero_video_url", models.CharField(blank=True, max_length=255)),
                 ("name", models.CharField(max_length=255)),
-                ("body", wagtail.core.fields.RichTextField()),
+                ("body", wagtail.fields.RichTextField()),
                 (
                     "hero_image",
                     models.ForeignKey(

@@ -7,7 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from localflavor.us.models import USStateField
-from wagtail.core.fields import RichTextField
+from wagtail.fields import RichTextField
 from wagtail.snippets.models import register_snippet
 
 
@@ -71,24 +71,6 @@ class RunwayUseAgreement(models.Model):
         if self.organization:
             return f"{self.name} ({self.organization}) [{self.submit_datetime}]"
         return f"{self.name} [{self.submit_datetime}]"
-
-
-class AOASubmission(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=100, blank=True, null=True)
-    address = models.CharField(max_length=250, blank=True, null=True)
-    purpose = models.TextField()
-
-    submit_datetime = models.DateTimeField(auto_now_add=True)
-    sns_processed_datetime = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        ordering = ["-pk"]
-
-    def __str__(self):
-        return f"{self.name} [{self.submit_datetime}]"
-
 
 
 class WAPASignup(models.Model):

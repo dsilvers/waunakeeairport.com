@@ -30,10 +30,6 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["localhost", "127.0.0.1"])
 
-AWS_REGION = env("AWS_DEFAULT_REGION")
-
-CSRF_TRUSTED_ORIGINS = [".waunakeeairpark.com"]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,7 +50,7 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
-    "wagtail.core",
+    "wagtail",
     "taggit",
     "modelcluster",
     "localflavor",
@@ -133,45 +129,20 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 WAGTAIL_SITE_NAME = "Waunakee Airport"
+WAGTAILADMIN_BASE_URL = "https://www.waunakeeairport.com"
 
-S3_BUCKET_NAME = env("S3_STATIC_FILES_BUCKET", default=None)
 
-if S3_BUCKET_NAME:
-    # Production
-    # Static files on S3
-    # Use `manage.py collectstatic` to sync and upload.
-    AWS_QUERYSTRING_AUTH = False
-    AWS_STORAGE_BUCKET_NAME = S3_BUCKET_NAME
-    AWS_S3_REGION_NAME = AWS_REGION
-    AWS_S3_BUCKET_NAME_STATIC = S3_BUCKET_NAME
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(ROOT_DIR, "static")]
 
-    STATIC_URL = "https://www.waunakeeairport.com/"
-    STATICFILES_DIRS = [os.path.join(ROOT_DIR, "static")]
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(ROOT_DIR, "media")
 
-    # S3 MEDIA FILES IN SUBDIRECTORIES
-    # https://www.caktusgroup.com/blog/2014/11/10/Using-Amazon-S3-to-store-your-Django-sites-static-and-media-files/
-    STATICFILES_LOCATION = "static"
-    STATICFILES_STORAGE = "settings.storages.StaticStorage"
-
-    MEDIAFILES_LOCATION = "media"
-    DEFAULT_FILE_STORAGE = "settings.storages.MediaStorage"
-else:
-    # Local Development
-    STATIC_URL = "/static/"
-    STATICFILES_DIRS = [os.path.join(ROOT_DIR, "static")]
-
-    MEDIA_URL = "/media/"
-    MEDIA_ROOT = os.path.join(ROOT_DIR, "media")
+RUA_PDF_ROOT = os.path.join(ROOT_DIR, "media-rua")
 
 DATABASES = {
     "default": env.db("DATABASE_URL"),
 }
-
-
-# SNS Topic for processing runway agreement form submissions
-SNS_TOPIC_AIRPORT_RUNWAY_AGREEMENT = env("SNS_TOPIC_AIRPORT_RUNWAY_AGREEMENT", default=None)
-SNS_TOPIC_AOA_FORM_SUBMISSION = env("SNS_TOPIC_AOA_FORM_SUBMISSION", default=None)
-S3_BUCKET_AIRPORT_RUNWAY_AGREEMENT = env("S3_BUCKET_AIRPORT_RUNWAY_AGREEMENT", default=None)
 
 SERVER_EMAIL = "Waunakee Airpark <fly@waunakeeairport.com>"
 
@@ -193,3 +164,6 @@ MANAGERS = [
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 USE_X_FORWARDED_HOST = True
+
+
+CSRF_TRUSTED_ORIGINS = ["https://www.waunakeeairpark.com", "http://localhost:8000", "http://127.0.0.1:8000"]

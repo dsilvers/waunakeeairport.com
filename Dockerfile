@@ -14,7 +14,7 @@
 
 # Use an official lightweight Python image.
 # https://hub.docker.com/_/python
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 ENV APP_HOME /app
 WORKDIR $APP_HOME
@@ -22,11 +22,14 @@ WORKDIR $APP_HOME
 # Removes output stream buffering, allowing for more efficient logging
 ENV PYTHONUNBUFFERED 1
 
+RUN apt-get update -y
+RUN apt-get install -y pkg-config libcairo2-dev libjpeg-dev libgif-dev build-essential
+
 # Install dependencies
 #COPY requirements .
-COPY requirements/development.txt development.txt
+COPY requirements/production.txt production.txt
 COPY requirements/base.txt base.txt
-RUN pip install --no-cache-dir -r development.txt
+RUN pip install --no-cache-dir -r production.txt
 
 # Copy local code to the container image.
 COPY . .

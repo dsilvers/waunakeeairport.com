@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import RunwayUseAgreement, WAPASignup, AOASubmission
+from .models import RunwayUseAgreement, WAPASignup
 
 
 class RunwayUseAgreementForm(forms.ModelForm):
@@ -23,19 +23,6 @@ class RunwayUseAgreementForm(forms.ModelForm):
             "ifr_rated",
             "i_agree",
         ]
-
-
-class AOAForm(forms.ModelForm):
-    class Meta:
-        model = AOASubmission
-        fields = [
-            "name",
-            "address",
-            "phone",
-            "email",
-            "purpose",
-        ]
-
 
 
 class WAPASignupForm(forms.ModelForm):
