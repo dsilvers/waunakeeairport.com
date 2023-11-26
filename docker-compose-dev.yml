@@ -14,18 +14,28 @@ services:
       - ./.db/:/var/lib/postgresql/data/
     ports:
       - 5432:5432
-  6p3-app:
+  django:
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: 6p3-app
+    container_name: 6p3
     env_file: .env
+    command: python /app/manage.py runserver 0.0.0.0:8000
     depends_on:
       - 6p3-db
+      - mailhog
     volumes:
       - .:/app
-    user: "${USER_RUN}:${GROUP_RUN}"
     ports:
-      - "${PORT}:${PORT}"
+      - 80:8000
+      - 8000:8000
     stdin_open: true
     tty: true
+  mailhog:
+     # image: mailhog/mailhog  # not arm
+    image: anatomicjc/mailhog  # is arm64
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
