@@ -134,6 +134,7 @@ WAGTAILADMIN_BASE_URL = "https://www.waunakeeairport.com"
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [os.path.join(ROOT_DIR, "static")]
+STATIC_ROOT = os.path.join(ROOT_DIR, 'static-collected')
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(ROOT_DIR, "media")
