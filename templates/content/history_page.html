@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+{% load static wagtailcore_tags %}
+
+{% block content %}
+
+<h3>Documentary Video</h3>
+
+<a href="https://www.youtube.com/watch?v=_0TfsupRd2Q" target="_blank">
+    <img src="https://www.waunakeeairport.com/media/images/doc-video-thumbnail.width-800.jpg"><br>
+    <span style="font-size:smaller;color:#4e4e4e;">By Scott Green - Green Productions</span>
+</a>
+
+<h3>A Brief History of the Waunakee Airport</h3>
+
+<video controls width="720">
+    <source src="https://waunakeeairport.com/media/WAUNAKEE_AIRPORT.mp4" type="video/mp4" />
+</video>
+
+<h3>{{ page.title }}</h3>
+
+{{ page.body|richtext }}
+
+{% endblock %}

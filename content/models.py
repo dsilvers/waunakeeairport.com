@@ -135,6 +135,16 @@ class ContentPage(WaunakeeAirportPageBaseMixin, Page):
     ]
 
 
+class HistoryPage(WaunakeeAirportPageBaseMixin, Page):
+    name = models.CharField(max_length=255)
+    body = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel("name"),
+        FieldPanel("body", classname="full"),
+    ]
+
+
 class PilotAirportInfoPage(WaunakeeAirportPageBaseMixin, Page):
     body = StreamField(
         [
