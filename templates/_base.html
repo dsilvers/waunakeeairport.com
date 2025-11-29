@@ -10,20 +10,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    {% block title %}
     <title>{% if page.title %}{{ page.title }} - {% endif %}Waunakee Airport</title>
+    
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}Waunakee Airport">
+    {% endblock %}
+
     {% if page.search_description %}<meta name="description" content="{{ page.search_description }}">{% endif %}
 
-    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}Waunakee Airport">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ page.get_site.root_url }}{{ page.url }}">
     {% if page.search_description %}<meta property="og:description" content="{{ page.search_description }}">{% endif %}
 
-    {% if page.og_image %}
-      {% image page.og_image fill-1200x630  as og_image %}
-    {% elif page.hero_image %}
-      {% image page.hero_image fill-1200x630 as og_image %}
-    {% endif %}
-    {% if og_image %}<meta property="og:image" content="{{ page.get_site.root_url }}{{ og_image.url }}">{% endif %}
+    {% block og_image %}
+      {% if page.og_image %}
+        {% image page.og_image fill-1200x630  as og_image %}
+      {% elif page.hero_image %}
+        {% image page.hero_image fill-1200x630 as og_image %}
+      {% endif %}
+      {% if og_image %}<meta property="og:image" content="{{ page.get_site.root_url }}{{ og_image.url }}">{% endif %}
+    {% endblock %}
 
     <link rel="canonical" href="{{ page.get_site.root_url }}{{ page.url }}">
 
