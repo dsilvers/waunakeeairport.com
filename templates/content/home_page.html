@@ -8,7 +8,7 @@
 </div>
 
 
-<div class="container mt-4">
+<div class="container mt-4 card-container">
     <div class="row">
 
     {% for block in page.cards %}
@@ -16,6 +16,23 @@
             {% include_block block %}
         {% endif %}
     {% endfor %}
+
+
+          <div class="col-md-4 d-flex align-items-stretch mb-3">
+            <div class="card" onclick="window.location='/cameras/';">
+                <img src="https://southramp.com/media/cameras/b5311ad5-5ff0-496b-88bb-aa92656df6a5/latest.jpg" class="img-fluid card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">Airport Cameras</h5>
+                <p class="card-text">
+                  View airport weather cameras and observe surface conditions.
+                </p>
+                <p class="text-center">
+                  <a href="/cameras/" class="btn btn-primary">View</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
 
     </div>
 </div>

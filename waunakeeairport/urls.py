@@ -16,6 +16,7 @@ urlpatterns = [
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("airpark/", TemplateView.as_view(template_name="forms/forms_list.html")),
+    path("cameras/", TemplateView.as_view(template_name="cameras.html")),
     path("forms/runway-use-agreement", document_views.RunwayUseAgreementView.as_view(), name="runway_use_agreement"),
     path("wapa/join", document_views.WAPASignupView.as_view(), name="wapa_signup"),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
